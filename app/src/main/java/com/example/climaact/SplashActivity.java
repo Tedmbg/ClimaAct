@@ -2,27 +2,35 @@ package com.example.climaact;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class SplashActivity extends AppCompatActivity {
-
-    private Button plantTreeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FirebaseApp.initializeApp(this); // Ensure Firebase is initialized
         setContentView(R.layout.activity_splash);
 
-        plantTreeButton = findViewById(R.id.plantTreeButton);
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        Button plantATree = findViewById(R.id.plantATree);
 
-        plantTreeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
+        plantATree.setOnClickListener(v -> navigateToNextActivity(mAuth));
+    }
+
+    private void navigateToNextActivity(FirebaseAuth mAuth) {
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            // User is signed in, navigate to MainActivity
+            startActivity(new Intent(SplashActivity.this, MainActivity.class));
+        } else {
+            // No user is signed in, navigate to LoginActivity
+            startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+        }
+        finish();
     }
 }

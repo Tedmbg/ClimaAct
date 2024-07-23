@@ -8,8 +8,8 @@
 
     <!-- Button for Planting a Tree action -->
     <Button
-        android:id="@+id/plantTreeButton"
-        android:layout_width="0dp"
+        android:id="@+id/plantATree"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Plant A Tree"
         android:backgroundTint="@color/green"
