@@ -1,6 +1,8 @@
 package com.example.climaact;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +15,7 @@ public class HomeActivity extends AppCompatActivity {
     private TextView tvUserName;
     private ViewPager2 viewPager;
     private FirebaseAuth mAuth;
+    private Handler sliderHandler = new Handler(Looper.getMainLooper());
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,7 +38,39 @@ public class HomeActivity extends AppCompatActivity {
         // Set up the ViewPager with an adapter
         viewPager.setAdapter(new CarouselAdapter());
 
-        // Set up the page indicators (if needed)
-        // This can be achieved by using a library or custom implementation
+        // Auto-scroll setup
+        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                sliderHandler.removeCallbacks(sliderRunnable);
+                sliderHandler.postDelayed(sliderRunnable, 3000); // Auto scroll delay
+            }
+        });
+    }
+
+    private Runnable sliderRunnable = new Runnable() {
+        @Override
+        public void run() {
+            int currentItem = viewPager.getCurrentItem();
+            int totalItems = viewPager.getAdapter().getItemCount();
+            if (currentItem < totalItems - 1) {
+                viewPager.setCurrentItem(currentItem + 1);
+            } else {
+                viewPager.setCurrentItem(0);
+            }
+        }
+    };
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        sliderHandler.removeCallbacks(sliderRunnable);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sliderHandler.postDelayed(sliderRunnable, 3000); // Auto scroll delay
     }
 }

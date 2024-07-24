@@ -30,6 +30,9 @@ public class CarouselAdapter extends RecyclerView.Adapter<CarouselAdapter.ViewHo
         int image = images[position];
         // Set the image resource
         holder.imageView.setImageResource(image);
+
+        // Optionally adjust scaleType programmatically if needed
+        holder.imageView.setScaleType(ImageView.ScaleType.FIT_CENTER); // or FIT_XY
     }
 
     @Override
