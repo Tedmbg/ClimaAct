@@ -1,4 +1,4 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -6,54 +6,65 @@
     tools:context=".MainActivity"
     android:background="@drawable/forest_background">
 
-    <!-- Description TextView providing information about the Amazon -->
-    <TextView
-        android:id="@+id/descriptionTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Increasing Kenya's forest cover will improve our air quality, enhance water storage, and stabilize our climate. Let's grow our forests for a healthier future."
-        android:textColor="@android:color/white"
-        android:textSize="16sp"
-        android:gravity="center"
-        app:layout_constraintBottom_toTopOf="@+id/buttonContainer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.9"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-
-    <!-- Container for Sign Up and Login buttons -->
-    <LinearLayout
-        android:id="@+id/buttonContainer"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <!-- Sign Up Button -->
-        <Button
-            android:id="@+id/signUpButton"
+        <TextView
+            android:id="@+id/descriptionTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="8dp"
-            android:text="Sign Up"
-            android:backgroundTint="@color/green"
-            android:textColor="@android:color/white"/>
+            android:text="Increasing Kenya's forest cover will improve our air quality, enhance water storage, and stabilize our climate. Let's grow our forests for a healthier future."
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:gravity="center"
+            app:layout_constraintBottom_toTopOf="@+id/buttonContainer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.9" />
 
-        <!-- Login Button -->
-        <Button
-            android:id="@+id/loginButton"
+        <LinearLayout
+            android:id="@+id/buttonContainer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="8dp"
-            android:text="Login"
-            android:backgroundTint="@color/green"
-            android:textColor="@android:color/white"/>
-    </LinearLayout>
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <Button
+                android:id="@+id/signUpButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="8dp"
+                android:text="Sign Up"
+                android:backgroundTint="@color/green"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/loginButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="8dp"
+                android:text="Login"
+                android:backgroundTint="@color/green"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:menu="@menu/bottom_navigation_menu" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
