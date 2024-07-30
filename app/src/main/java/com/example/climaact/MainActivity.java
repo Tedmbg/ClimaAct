@@ -5,42 +5,62 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.climaact.R;
 
-// MainActivity class that represents the main screen of the app
+
 public class MainActivity extends AppCompatActivity {
 
-    // Declare buttons for Sign Up, Login, and Plant Tree actions
-    private Button signUpButton;
-    private Button loginButton;
-
+    private Button loginButton, signUpButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Initialize buttons using their IDs from the layout
-        signUpButton = findViewById(R.id.signUpButton);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
+
         loginButton = findViewById(R.id.loginButton);
+        signUpButton = findViewById(R.id.signUpButton);
 
-        // Set click listener for the Sign Up button
-        signUpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Start SignUpActivity when the button is clicked
-                Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        // Set click listener for the Login button
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Start LoginActivity when the button is clicked
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
+                Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(loginIntent);
             }
         });
+
+        signUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent signUpIntent = new Intent(MainActivity.this, SignUpActivity.class);
+                startActivity(signUpIntent);
+            }
+        });
+
+        // Set default fragment
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+        }
     }
+
+    private final BottomNavigationView.OnNavigationItemSelectedListener navListener = item -> {
+        Fragment selectedFragment = null;
+        switch (item.getItemId()) {
+            case R.id.navigation_home:
+                selectedFragment = new HomeFragment();
+                break;
+            case R.id.navigation_cart:
+                selectedFragment = new CartFragment();
+                break;
+            case R.id.navigation_activity_tracker:
+                selectedFragment = new ActivityTrackerFragment();
+                break;
+        }
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+        return true;
+    };
 }

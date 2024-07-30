@@ -1,0 +1,11 @@
+<resources>
+    <item name="navigation_home" type="id"/>
+    <item name="navigation_cart" type="id"/>
+    <item name="navigation_activity_tracker" type="id"/>
+    <item name="fragment_container" type="id"/>
+    <item name="bottom_navigation" type="id"/>
+    <item name="loginButton" type="id"/>
+    <item name="signUpButton" type="id"/>
+    <item name="buttonContainer" type="id" />
+    <item name="descriptionTextView" type="id" />
+</resources>
