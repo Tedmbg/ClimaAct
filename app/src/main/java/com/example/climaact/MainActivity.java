@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.example.climaact.R;
+import android.view.MenuItem;
+import androidx.annotation.NonNull;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -47,20 +49,27 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private final BottomNavigationView.OnNavigationItemSelectedListener navListener = item -> {
-        Fragment selectedFragment = null;
-        switch (item.getItemId()) {
-            case R.id.navigation_home:
-                selectedFragment = new HomeFragment();
-                break;
-            case R.id.navigation_cart:
-                selectedFragment = new CartFragment();
-                break;
-            case R.id.navigation_activity_tracker:
-                selectedFragment = new ActivityTrackerFragment();
-                break;
-        }
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
-        return true;
-    };
+    private final BottomNavigationView.OnNavigationItemSelectedListener navListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(MenuItem item) {
+                    Fragment selectedFragment = null;
+                    int itemId = item.getItemId();
+
+                    if (itemId == R.id.navigation_home) {
+                        selectedFragment = new HomeFragment();
+                    } else if (itemId == R.id.navigation_cart) {
+                        selectedFragment = new CartFragment();
+                    } else if (itemId == R.id.navigation_activity_tracker) {
+                        selectedFragment = new ActivityTrackerFragment();
+                    }
+
+                    if (selectedFragment != null) {
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.fragment_container, selectedFragment)
+                                .commit();
+                    }
+                    return true;
+                }
+            };
 }
