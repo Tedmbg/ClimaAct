@@ -6,7 +6,7 @@
     tools:context=".CartFragment">
 
     <!-- Cart Items List -->
-    <RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewCart"
         android:layout_width="match_parent"
         android:layout_height="0dp"

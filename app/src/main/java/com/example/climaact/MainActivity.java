@@ -3,14 +3,13 @@ package com.example.climaact;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.example.climaact.R;
 import android.view.MenuItem;
-import androidx.annotation.NonNull;
+import android.widget.Button;
 
+import androidx.annotation.NonNull;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -58,13 +57,14 @@ public class MainActivity extends AppCompatActivity {
 
                     if (itemId == R.id.navigation_home) {
                         selectedFragment = new HomeFragment();
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.fragment_container, selectedFragment)
+                                .commit();
                     } else if (itemId == R.id.navigation_cart) {
-                        selectedFragment = new CartFragment();
+                        Intent intent = new Intent(MainActivity.this, PlantsGridActivity.class);
+                        startActivity(intent);
                     } else if (itemId == R.id.navigation_activity_tracker) {
                         selectedFragment = new ActivityTrackerFragment();
-                    }
-
-                    if (selectedFragment != null) {
                         getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.fragment_container, selectedFragment)
                                 .commit();

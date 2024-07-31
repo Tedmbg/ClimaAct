@@ -27,6 +27,8 @@
         <activity android:name=".SignUpActivity" android:exported="true" />
         <activity android:name=".LoginActivity" android:exported="true" />
         <activity android:name=".HomeActivity" android:exported="true" />
+        <activity android:name=".CartActivity" />
+        <activity android:name=".PlantsGridActivity" />
     </application>
 
 </manifest>

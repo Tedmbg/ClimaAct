@@ -1,19 +1,19 @@
 package com.example.climaact;
 
 public class CartItem {
-    private String itemName;
-    private double itemPrice;
+    private Plant plant;
+    private int quantity;
 
-    public CartItem(String itemName, double itemPrice) {
-        this.itemName = itemName;
-        this.itemPrice = itemPrice;
+    public CartItem(Plant plant, int quantity) {
+        this.plant = plant;
+        this.quantity = quantity;
     }
 
-    public String getItemName() {
-        return itemName;
-    }
+    // Getters
+    public Plant getPlant() { return plant; }
+    public int getQuantity() { return quantity; }
 
-    public double getItemPrice() {
-        return itemPrice;
-    }
+    // Setters
+    public void setPlant(Plant plant) { this.plant = plant; }
+    public void setQuantity(int quantity) { this.quantity = quantity; }
 }
